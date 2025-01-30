@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes radar-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.radar-animation {
+  animation: radar-spin 4s linear infinite;
+  transform-origin: center;
+}
+
+.blink-animation {
+  animation: blink 2s ease-in-out infinite;
+}
+
+.pulse-animation {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.radar-grid {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 255, 255, 0.1) 0%,
+    rgba(0, 255, 255, 0.05) 50%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  border: 2px solid rgba(0, 255, 255, 0.3);
+  overflow: hidden;
+}
+
+.radar-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    rgba(0, 255, 255, 0.8), 
+    rgba(0, 255, 255, 0.4),
+    transparent
+  );
+  transform-origin: left;
+  filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.4));
+}
+
+.radar-circles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-radial-gradient(
+    circle at center,
+    transparent,
+    transparent 30px,
+    rgba(0, 255, 255, 0.1) 30px,
+    rgba(0, 255, 255, 0.1) 31px
+  );
+}
+
+.satellite-popup .mapboxgl-popup-content {
+  @apply bg-gray-900/95 backdrop-blur-xl border border-cyan-500/20 text-white p-0 rounded-lg shadow-xl;
+}
+
+.satellite-popup .mapboxgl-popup-close-button {
+  @apply text-gray-400 hover:text-white p-2;
+}
+
+.satellite-popup .mapboxgl-popup-tip {
+  @apply border-t-gray-900/95;
+}
+
+.xterm {
+  padding: 1rem;
+  height: 100%;
+}
+
+.xterm-viewport {
+  @apply bg-gray-900;
+}
+
+body {
+  @apply bg-gray-900;
+  background-image: 
+    radial-gradient(circle at 50% 50%, 
+      rgba(0, 255, 255, 0.1) 0%, 
+      transparent 50%),
+    linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9));
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-600 rounded-full hover:bg-gray-500 transition-colors;
+}
